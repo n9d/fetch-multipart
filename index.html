@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>form test</title>
+  </head>
+  <body>
+    <p>
+      <h3>postでtextを送信</h3>
+      <form action="r" method="post">
+        <input type="text" name=a value="hello">
+        <input type="submit">
+      </form>
+    </p>
+
+    <p>
+      <h3>画像をpost</h3>
+      <form action="r" method=post enctype="multipart/form-data">
+        <input type="file" name=p>
+        <input type="submit">
+      </form>
+    </p>
+
+    <p>
+      <h3>textと画像をpost</h3>
+      <form action="r" method=post enctype="multipart/form-data">
+        <input type="text" name=a value="hello">
+        <input type="file" name=p>
+        <input type="submit">
+      </form>
+    </p>
+    
+    <p>
+      <h3>postでtextを送信 js</h3>
+      <form action="r" id="form1">
+        <input type="text" name=a value="hello">
+        <input type="button" name="submit" onclick="send1()" value="送信">
+      </form>
+      <script>
+        function send1(){
+          fetch("/r",{
+            method:"post",
+            headers: {},
+            body: new FormData(form1)
+          }).then(r=>r.text()).then(r=>console.log(r))
+        }
+      </script>
+    </p>
+
+    <p>
+      <h3>postでtextと画像を送信 js</h3>
+      <form action="r" id="form2">
+        <input type="text" name=a value="hello">
+        <input type="file" name=p>
+        <input type="button" name="submit" onclick="send2()" value="送信">
+      </form>
+      <script>
+        function send2(){
+          fetch("/r",{
+            method:"post",
+            headers: {},
+            body: new FormData(form2)
+          }).then(r=>r.text()).then(r=>console.log(r))
+        }
+      </script>
+    </p>
+
+  <p>
+    <h3>jsでjsonを送信</h3>
+    <input type="button" name="submit" onclick="send3()" value="送信">
+    <script>
+      function send3(){
+        fetch("r", {
+          mode: 'no-cors',
+          method: 'post',
+          headers: {
+            'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+            'Content-Type': 'multipart/form-data'
+          },
+          body: JSON.stringify({a:"hello"}) || null,
+          }).then(function(response) {
+            console.log(response.status)
+            console.log("response");
+            console.log(response);
+            return(response.text())
+          }).then(x=>console.log(x))
+        }
+    </script>
+  </p>
+
+  </body>
+</html>
