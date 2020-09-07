@@ -1,0 +1,23 @@
+{
+  "name": "fetch-multipart",
+  "version": "1.0.0",
+  "description": "- httpリクエストのpostがどんな感じか知る",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/n9d/fetch-multipart.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/n9d/fetch-multipart/issues"
+  },
+  "homepage": "https://github.com/n9d/fetch-multipart#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

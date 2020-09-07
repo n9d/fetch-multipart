@@ -64,28 +64,60 @@
       </script>
     </p>
 
-  <p>
-    <h3>jsでjsonを送信</h3>
-    <input type="button" name="submit" onclick="send3()" value="送信">
-    <script>
-      function send3(){
-        fetch("r", {
-          mode: 'no-cors',
-          method: 'post',
-          headers: {
-            'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-            'Content-Type': 'multipart/form-data'
-          },
-          body: JSON.stringify({a:"hello"}) || null,
-          }).then(function(response) {
-            console.log(response.status)
-            console.log("response");
-            console.log(response);
-            return(response.text())
-          }).then(x=>console.log(x))
-        }
-    </script>
-  </p>
+    <p>
+      <h3>jsでjsonを送信</h3>
+      <input type="button" name="submit" onclick="send3()" value="送信">
+      <script>
+        function send3(){
+          fetch("r", {
+            mode: 'no-cors',
+            method: 'post',
+            headers: {
+              'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+              'Content-Type': 'multipart/form-data'
+            },
+            body: JSON.stringify({a:"hello"}) || null,
+            }).then(function(response) {
+              console.log(response.status)
+              console.log("response");
+              console.log(response);
+              return(response.text())
+            }).then(x=>console.log(x))
+          }
+      </script>
+    </p>
+
+    <p>
+      <h3>jsでBase64を送信</h3>
+      <input type="button" name="submit" onclick="send3()" value="送信">
+      <script>
+        function send3(){
+          const text = "hello";
+          // エンコード
+          let utf8str = String.fromCharCode.apply(null, new TextEncoder().encode(text));
+          const encoded = btoa(utf8str);
+          // デコード
+          const decoded_utf8str = atob(encoded);
+          const decoded_array = new Uint8Array(Array.prototype.map.call(decoded_utf8str, c => c.charCodeAt()));
+          const decoded = new TextDecoder().decode(decoded_array);
+
+          fetch("r", {
+            mode: 'no-cors',
+            method: 'post',
+            headers: {
+              'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
+              // 'Content-Type': 'multipart/form-data'
+            },
+            body: encoded || null,
+            }).then(function(response) {
+              console.log(response.status)
+              console.log("response");
+              console.log(response);
+              return(response.text())
+            }).then(x=>console.log(x))
+          }
+      </script>
+    </p>
 
   </body>
 </html>
